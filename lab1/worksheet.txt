@@ -102,11 +102,11 @@ translation of second program
    -----  ---------
    a      09
 
-   b      _____
+   b      10
 
-   c      _____
+   c      11
 
-   ____   12
+   d      12
 
    start  0
 
@@ -117,31 +117,31 @@ translation of second program
    ------  -----------------       -----   --------------------
            label(start)
 
-   (00:)   _____(b)                00:     50
+   (00:)   load(b)                 00:     50
 
                                    01:     10
 
-   (02:)   add(c)                  02:     _____
+   (02:)   add(c)                  02:     40
 
-                                   03:     _____
+                                   03:     11
 
-   (04:)   sub(_____)              04:     30
+   (04:)   sub(d)                  04:     30
 
                                    05:     12
 
-   (06:)   store(a)                06:     _____
+   (06:)   store(a)                06:     60
 
-                                   07:     _____
+                                   07:      9
 
-   (08:)   halt                    08:     _____
+   (08:)   halt                    08:     00
 
    (09:)   word(a,0)               09:      0
 
    (10:)   word(b,3)               10:      3
 
-   (11:)   word(c,48)              11:     _____
+   (11:)   word(c,48)              11:     48
 
-   (12:)   word(d,9)               12:     _____
+   (12:)   word(d,9)               12:      9
 
    (13:)   start                   13:     00
 
@@ -177,13 +177,13 @@ translation of third program
    label  addr==loc
    -----  ---------
 
-   alpha  _____
+   alpha     9
 
-   beta   _____
+   beta     10
 
-   gamma  _____
+   gamma    11
 
-   delta  _____
+   delta    12
 
    start     0
 
@@ -194,31 +194,31 @@ translation of third program
    ------  -----------------       -----   --------------------
            label(start)
 
-   (00:)   load(beta)              00:     _____
+   (00:)   load(beta)              00:       50
 
-                                   01:     _____
+                                   01:       10
 
-   (02:)   mul(gamma)              02:     _____
+   (02:)   mul(gamma)              02:       20
 
-                                   03:     _____
+                                   03:       11
 
-   (04:)   div(delta)              04:     _____
+   (04:)   div(delta)              04:       10
 
-                                   05:     _____
+                                   05:       12
 
-   (06:)   store(alpha)            06:     _____
+   (06:)   store(alpha)            06:       60
 
-                                   07:     _____
+                                   07:        9
 
-   (08:)   halt                    08:     _____
+   (08:)   halt                    08:       00
 
-   (09:)   word(alpha,50)          09:     _____
+   (09:)   word(alpha,50)          09:       50
 
-   (10:)   word(beta,2)            10:     _____
+   (10:)   word(beta,2)            10:        2
 
-   (11:)   word(gamma,12)          11:     _____
+   (11:)   word(gamma,12)          11:       12
 
-   (12:)   word(delta,6)           12:     _____
+   (12:)   word(delta,6)           12:        6
 
-   (13:)   start                   13:       0
+   (13:)   start                   13:        0
 
