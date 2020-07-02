@@ -5,7 +5,7 @@ comment(`    sum = 0;                                          ')
 comment('    i = 0;                                            ')
 comment(`    while(i < 10) {                                   ')
 comment(`       sum = sum + i;                                 ')  
-comment('		i++;                                           ')
+comment('		i++;                                   ')
 comment(`    }                                                 ')
 
    word(sum,0)
