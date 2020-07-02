@@ -6,7 +6,7 @@ comment('    i = 0;                                            ')
 comment('    j = 10;                                           ')
 comment(`    for (i = 1; i <= j; i++)) {                       ')
 comment(`       sum = sum + i;                                 ')  
-comment('		i++;                                           ')
+comment('		i++;                                   ')
 comment(`    }                                                 ')
 
    word(sum,0)
