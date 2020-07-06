@@ -26,17 +26,17 @@
 main:
 	push 	{lr}
 
-	mov	r0, #1		/* 1 -> X */
-	mov	r1, #2		/* 2 -> Y */
-	mov	r2, #3		/* 3 -> Z */
+	mov	r0, #1			/* 1 -> X */
+	mov	r1, #2			/* 2 -> Y */
+	mov	r2, #3			/* 3 -> Z */
 
 	/* if-then-else comparison */
-	missing		 		/* compare X to Y */
-	missing				/* branch if not equal to the else part */
+	cmp r0, r1	 		/* compare X to Y */
+	bne		else_part	/* branch if not equal to the else part */
 	
 then_part:
 	mov	r2, #1  	    /* 1 -> Z */
-	missing			    /* skip beyond else part */
+	b 	end_if		    /* skip beyond else part */
 
 else_part:
 	mov	r2, #0		    /* 0 -> Z  */

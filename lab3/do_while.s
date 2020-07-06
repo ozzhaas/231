@@ -22,15 +22,15 @@
 main:
 	push 	{lr}
     
-	mov	r2, #0		/* sum = zero */
-	mov	r3, #4		/* n = 4      */
+	mov	r2, #0			/* sum = zero */
+	mov	r3, #4			/* n = 4      */
 
-do_top:
-	add	r2, r2, r3	/* sum = sum + n */
-	missing				/* n--           */
+do_top:	
+	add	r2, r2, r3		/* sum = sum + n */
+	sub r3, r3, #1		/* n--           */
 
-	missing				/* compare n to zero */
-	missing				/* branch if not zero to "do_top" */
+	cmp		r3, #0		/* compare n to zero */
+	bne		do_top		/* branch if not zero to "do_top" */
 
     ldr r0, =out_line   /* pseudo-op to put addr of out_line in r0  */
 	mov	r1, #4

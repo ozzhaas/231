@@ -29,15 +29,15 @@ main:
 /* r4 holds the value of A, r5 holds the value of B, etc */
 	
 	mov	r4, #0		/* put zero in A */
-	missing			/* put one in B  */
-	missing			/* put zero in C */
+	mov r5, #1		/* put one in B  */
+	mov r6, #0		/* put zero in C */
 
 test:
-	missing	 	          /* compare A and 17 */
-	missing			      /* branch if greater than 0 to "done" */
+	cmp r4, #17	          /* compare A and 17 */
+	bge 	done	      /* branch if greater than 0 to "done" */
 	add 	r4, r4, r5	  /* A = A + B */
-	missing			      /* C = C + 1 */
-	missing			      /* branch always to "test" */
+	add     r6, r6, #1    /* C = C + 1 */
+	b 		test	      /* branch always to "test" */
 
 done:
     ldr r0, =out_line      /* put string for printf in r0  */
