@@ -1,5 +1,12 @@
+Kellen Haas
+CPSC 2311 
+Lab3
+7/8/20
+
+
+
 1.
-	A = 17, B = 1, C = 17
+	A = 18, B = 1, C = 18
 
 2.
 	The triangular number for 4 is 10.
@@ -11,7 +18,7 @@ Branch    |  N  |  and/or  |  Z  |
 ----------------------------------
 b or bal  |  X  |    --    |  X  |
 beq       |  0  |    --    |  1  |
-bne       |  1  |    --    |  0  |
+bne       |  X  |    --    |  0  |
 blt       |  1  |    --    |  0  |
 ble       |  1  |    or    |  1  |
 bgt       |  0  |   and    |  0  |

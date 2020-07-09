@@ -7,22 +7,49 @@
 
 
 
-	define(N,0)
-	define(decVal,1)
-	define(pwrOf2,2)
-	define(temp,3)
-	define(two,4)
-	define(sum,5)
-	define(zero,6)
 
-define(start,7)
-			
 
-define(loop,11)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	define(N,0)			
+	define(decVal,1)			
+	define(pwrOf2,2)			
+	define(temp,3)			
+	define(ten,4)			
+	define(two,5)			
+	define(sum,6)			
+	define(zero,7)			
+	define(newN,8)			
+
+define(start,9)
+		
+define(loop,13)					
+	
+								
+
 													
+									
+
 				
 
-define(done,45)
+define(done,55)
 		
 
 

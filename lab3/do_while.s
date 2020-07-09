@@ -1,4 +1,10 @@
-/* This program executes a DO loop that computes the triangular number for 4
+/* 
+ * Kellen Haas
+ * CPSC 2311
+ * Lab3 
+ * 7/8/20
+ * 
+ * This program executes a DO loop that computes the triangular number for 4
  *
  * The C code looks like this:
  *

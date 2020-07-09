@@ -1,4 +1,9 @@
-/*
+/* 
+ * Kellen Haas
+ * CPSC 2311
+ * Lab3 
+ * 7/8/20
+ * 
  * This program executes a WHILE loop for values less than or equal to 17
  *
  * The C code would look like this:
@@ -34,7 +39,7 @@ main:
 
 test:
 	cmp r4, #17	          /* compare A and 17 */
-	bge 	done	      /* branch if greater than 0 to "done" */
+	bgt 	done	      /* branch if greater than 0 to "done" */
 	add 	r4, r4, r5	  /* A = A + B */
 	add     r6, r6, #1    /* C = C + 1 */
 	b 		test	      /* branch always to "test" */

@@ -1,4 +1,10 @@
-/* This program demonstrates the use of the compare synthetic
+/* 
+ * Kellen Haas
+ * CPSC 2311
+ * Lab3 
+ * 7/8/20
+ * 
+ * This program demonstrates the use of the compare synthetic
  * instruction along with a branch instruction to generate an
  * "if-then-else" programming language construct.
  *
