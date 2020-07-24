@@ -5,24 +5,24 @@
  * 7/23/20
 */
 
-    .file "sum.s"
+    .file "average.s"
     .text
     .align  2
     .global main
     .type   main, %function
 
-/* main() sums 10 values from stdin and prints the sum */
+/* main() sums 10 values from stdin and prints the average */
 main:
-    push {lr}    				// save lr
+    push {lr}    // save lr
 
     //Code goes here
-    add sp, sp, #-40 			//10 integers each 4 bytes
+    add sp, sp, #-64 			//16 integers each 4 bytes
     add r4, sp, #0				//Allocate space for local variables
     mov r5, #1					//set r5 equal to 0 for the loop incrementer
 
         firstLoop:
-            cmp r5, #10			//compare r5 to the loop limit
-            bgt finishFirst		//if r5 is greater than 10 exit the loop
+            cmp r5, #16			//compare r5 to the loop limit
+            bgt finishFirst		//if r5 is greater than 16 exit the loop
 
             ldr r0, =rdfmt		//use scanf to read in the numbers from input2.txt
             mov r1, r4			//move the stack pointer to be stored in r1
@@ -38,8 +38,9 @@ main:
             add r6, #0			//set the average stored in r6 to 0
 
         secondLoop:
-            cmp r5, #10			//compare r5 with 10 
-            bgt finishSecond	//if it's greater than 10 exit the loop
+            cmp r5, #16			//compare r5 with 16 
+            bgt finishSecond	//if it's greater than 16 exit the loop
+
             ldr r0, [r4]		//read in the value r4 is pointing to 
 								//on the stack and store it in r0
 
@@ -50,11 +51,15 @@ main:
             b secondLoop
 
         finishSecond:
-            ldr r0, =prtfmt 	//use printf to print out the sum
-            mov r1, r6			//store the sum in r1
+            ldr r0, =prtfmt 	//use printf to print out the average
+
+			asr r6, #4			//arithmetic shift right in order to divide
+								//the sum by the amount of numbers
+
+            mov r1, r6			//store the final average result in r1
             bl printf			//call printf
 
-            add sp, sp, #40		//restore the stack pointer
+            add sp, sp, #64		//restore the stack pointer
 
 
 
@@ -63,4 +68,4 @@ main:
 
 .section    .rodata
     rdfmt:        .asciz "%d"
-    prtfmt:       .asciz "sum is %d\n"
+    prtfmt:       .asciz "average is %d\n"
