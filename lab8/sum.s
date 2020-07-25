@@ -40,10 +40,10 @@ main:
         secondLoop:
             cmp r5, #10			//compare r5 with 10 
             bgt finishSecond	//if it's greater than 10 exit the loop
-            ldr r0, [r4]		//read in the value r4 is pointing to 
+            ldr r0, [r4]		//read in the value r4 is pointing to
 								//on the stack and store it in r0
 
-            add r6, r6, r0		//the sum is equal to r6 + r0 
+            add r6, r6, r0		//the sum is equal to r6 + r0
 
             add r4, r4, #4		//adjust the stack pointer for offset
             add r5, r5, #1		//increment r5 and then loop again
