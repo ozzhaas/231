@@ -1,3 +1,10 @@
+/* Kellen Haas
+ * CPSC 2311
+ * Lab9
+ * 7/24/20
+ */
+
+
 init:
         push  {lr}
         sub   sp, sp, #8
@@ -52,4 +59,4 @@ main:
         pop    {pc}
 
 fmtstr1:
-        .ascii "The members of the structure dot are %d, %d\012\000"	
+        .ascii "The members of the structure dot are %d, %d\012\000"

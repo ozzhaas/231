@@ -1,17 +1,38 @@
+/* Kellen Haas
+ * CPSC 2311
+ * Lab9
+ * 7/24/20
+ */
+
+
+
 1.(10 pts) In the function main on line 33, a mov instruction copies the stack pointer address into r0.
 
-	a.What is that the address of? (Hint: Look at the C code)
-	b.What is it used for afterwards in init and main?
+	a. What is that the address of? (Hint: Look at the C code)
+		This line contains the address of the start of the point structure named dot.
+
+
+	b. What is it used for afterwards in init and main?
+		The address will be used as a base point for the struct and allow the
+		program to increment or decrement through the stack to access/store
+		different values of/in the struct.
+
 2.(10 pts) Which two lines in the C program (put the full line of code, not line numbers) correspond to the following two lines of function init in the assembly version?
 
-	str r1, [sp]
-	str r2, [sp, #4]
+	str r1, [sp]					local.x = x_arg;
+	str r2, [sp, #4]				local.y = y_arg;
+
+
 3.(10 pts) In the function zero, what value(s) does the program store at addresses [sp] and [sp, #4] (Lines 19 and 20)?
+
+	It stores the value 0 in both addresses because r3 is initialized to 0 on the line immediately preceding line 19.
+
 
 4.(10 pts) Which two lines in the C program (put the full line of code, not line numbers) correspond to the following two lines of function zero in the assembly version?
 
-	str r3, [sp]
-	str r3, [sp, #4]
+	str r3, [sp]					local.x = 0;
+	str r3, [sp, #4]				local.y = 0;
+
+
 5.(10 pts) Based on the ARM code (not the C code), in the function zero, what does it return? Remember, there is no specific return <variable> command in ARM. The return value is always whatever is stored in the register designated to hold the return value (you should know which one this is). Don't answer the question with the register name, actually describe what the value is and what it represents.
-
-
+	The function zero returns the point struct called local that contains the values 0 and 0 for x and y.

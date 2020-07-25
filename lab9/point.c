@@ -1,3 +1,10 @@
+/* Kellen Haas
+ * CPSC 2311
+ * Lab9
+ * 7/24/20
+ */
+
+
 #include <stdio.h>
 
 struct point
