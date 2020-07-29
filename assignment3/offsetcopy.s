@@ -19,7 +19,7 @@
 @ r5 = temporary storage for calculations
 
 offset:
-    mov r4, #4              @ store constant 4 in r4
+    mov r6, #4              @ store constant 4 in r4
 
     mov r5, r1, lsl r3      @ use logical shift left to multiply i by the
                             @ number of columns per row and store in r5 temporarily
@@ -27,7 +27,7 @@ offset:
     add r5, r5, r2          @ add the result of the first multiplication to j
                             @ and store the result in r5 again
 
-    mov r4, r5, lsl r4      @ finally, use logical shift left to multiply the
+    mov r6, r5, lsl r6      @ finally, use logical shift left to multiply the
                             @ result of the first multiplication and the addition
                             @ by the elements' size (4 bytes)
 

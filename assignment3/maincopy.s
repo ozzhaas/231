@@ -24,33 +24,32 @@
 main:
     push {r4-r5, lr}
     mov    r4, r0           @ r4 <-- r0 = argc
-    mov    r5, r1           @ r5 <-- r1 = argv
 
-    ldr r0, [r5, #4]        @ put i into r6 as an int
+    ldr r0, [r1, #4]        @ put i into r6 as an int
     bl atoi                 @ convert string to integer
-    mov r6, r0              @ store new i in r6
+    mov r2, r0              @ store new i in r6
 
-    ldr r0, [r5, #8]        @ put j into r7 as an int
+    ldr r0, [r1, #8]        @ put j into r7 as an int
     bl atoi                 @ convert string to integer
-    mov r7, r0              @ store j in r7
+    mov r3, r0              @ store j in r7
 
-    ldr r0, [r5, #12]       @ put the number of columns per row into r8 as an int
+    ldr r0, [r1, #12]       @ put the number of columns per row into r8 as an int
     bl atoi                 @ convert string to integer
-    mov r8, r0              @ store n in r8
+    mov r4, r0              @ store n in r8
 
     bl offset               @ call offset
-    mov r4, r0
+    mov r5, r0
 
     ldr r0, =fmt1           @ set up print statement fmt1
-    mov r1, r6              @ move i to r1 to be printed
+    mov r1, r2              @ move i to r1 to be printed
     bl printf               @ call printf
 
     ldr r0, =fmt2           @ set up print statement fmt2
-    mov r1, r7              @ move j to r1 to be printed
+    mov r1, r3              @ move j to r1 to be printed
     bl printf               @ call printf
 
     ldr r0, =fmt3           @ set up print statement fmt3
-    mov r1, r8              @ move n to r8 to be printed
+    mov r1, r6              @ move n to r8 to be printed
     bl printf               @ call printf
 
 
