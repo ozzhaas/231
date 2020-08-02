@@ -24,7 +24,7 @@ encode:
 
    loop:
 
-      ldr r10, [r0, r4]  // og[i]
+      ldrb r10, [r0, r4]  // og[i]
 
       cmp r10, #0
       beq done
@@ -53,11 +53,10 @@ encode:
 
 store:
 
-      str r7, [r1, r4]
+      strb r7, [r1, r4]
 
-      add r4, r4, #4
-      add r5, r5, #4
-
+      add r4, r4, #1
+      add r5, r5, #1
 subtract:
 
       sub r7, r7, #26
@@ -65,8 +64,8 @@ subtract:
 
 
 skip:
-    add r4, r4, #4
-    add r5, r5, #4
+    add r4, r4, #1
+    add r5, r5, #1
 
   bal loop
 
