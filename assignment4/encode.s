@@ -18,4 +18,62 @@
 
 
 encode:
-    
+
+      mov r4, #0    // iterator for input string
+      mov r5, #0    // iterator for key
+
+   loop:
+
+      ldrb r10, [r0, r4]  // og[i]
+
+      cmp r10, #0
+      beq done
+
+      cmp r10, #97
+      blt skip
+
+      cmp r10, #122
+      bgt skip
+
+      sub r10, r10, #96
+
+      ldrb r11, [r2, r5]  // key[i]
+
+      cmp r11, #0
+      beq restartKey
+
+   label1:
+      sub r11, r11, #96
+
+      mov r7, #0
+      add r7,r10, r11
+
+      cmp r7, #26
+      bgt subtract
+
+store:
+
+      str r7, [r1, r4]
+
+      add r4, r4, #4
+      add r5, r5, #4
+
+subtract:
+
+      sub r7, r7, #26
+      bal store
+
+
+skip:
+    add r4, r4, #4
+    add r5, r5, #4
+
+  bal loop
+
+restartKey:
+  mov r5, #0
+  bal label1
+
+done:
+
+  bx lr
