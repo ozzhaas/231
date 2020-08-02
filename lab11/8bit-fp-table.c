@@ -1,3 +1,13 @@
+/* Kellen Haas
+ * CPSc 2311
+ * Lab11
+ * 8/1/20
+ */
+
+
+
+
+
 #include <stdio.h>
 #include <math.h>
 

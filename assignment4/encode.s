@@ -1,4 +1,4 @@
-/* Kellen Haas
+/* Kellen Haas & Caroline Boyt
  * CPSC 2310
  * Assignment 4
  * 8/1/20
@@ -12,12 +12,24 @@
      .type encode, %function
 
 /********************************************************************
-    You are to write a subroutine for dealing with encoded messages using the following private-key algorithm: Consider each letter of a message and of a shared key as an integer from 1 to 26 (i.e., a=1, b=2, ..., z=26). The resulting letter in the encoded message is obtained by adding the letter values together and then subtracting 26 if the sum is greater than 26. The key is repeated until the complete message is encoded. Spaces, digits, and punctuation are not encoded but they do count towards the repetition of the key.
+    You are to write a subroutine for dealing with encoded messages using the
+    following private-key algorithm: Consider each letter of a message and of
+    a shared key as an integer from 1 to 26 (i.e., a=1, b=2, ..., z=26).
+    The resulting letter in the encoded message is obtained by adding the
+    letter values together and then subtracting 26 if the sum is greater than
+    26. The key is repeated until the complete message is encoded. Spaces,
+     digits, and punctuation are not encoded but they do count towards the
+     repetition of the key.
 ********************************************************************/
 
 
 
 encode:
+
+      push {r7, r10, r11, lr}
+
+      cmp r3, #1
+      beq done
 
       mov r4, #0    // iterator for input string
       mov r5, #0    // iterator for key
@@ -43,7 +55,8 @@ encode:
       beq restartKey
 
    label1:
-     sub r11, r11, #96
+
+      sub r11, r11, #96
 
       mov r7, #0
       add r7,r10, r11
@@ -51,28 +64,48 @@ encode:
       cmp r7, #26
       bgt subtract
 
-store:
+   store:
 
+<<<<<<< HEAD
       strb r7, [r1, r4]
 
       add r4, r4, #1
       add r5, r5, #1
 subtract:
+=======
+      add r7, r7, #96
+      strb r7, [r1, r4]
+
+      add r4, r4, #1
+      add r5, r5, #1
+
+      bal loop
+
+   subtract:
+>>>>>>> 634e8773bc152f26dc7af4ccd576f1f5e0127730
 
       sub r7, r7, #26
       bal store
 
+   skip:
 
+<<<<<<< HEAD
 skip:
     add r4, r4, #1
     add r5, r5, #1
+=======
+      add r4, r4, #1
+      add r5, r5, #1
+>>>>>>> 634e8773bc152f26dc7af4ccd576f1f5e0127730
 
-  bal loop
+      bal loop
 
-restartKey:
-  mov r5, #0
-  bal label1
+   restartKey:
+
+      mov r5, #0
+      ldrb r11, [r2, r5]
+      bal label1
 
 done:
-
-  bx lr
+      pop {r7, r10, r11, pc}
+      bx lr
