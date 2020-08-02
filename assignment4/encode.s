@@ -1,4 +1,4 @@
-/* Kellen Haas
+/* Kellen Haas & Caroline Boyt
  * CPSC 2310
  * Assignment 4
  * 8/1/20
@@ -26,12 +26,17 @@
 
 encode:
 
+      push {r7, r10, r11, lr}
+
+      cmp r3, #1
+      beq done
+
       mov r4, #0    // iterator for input string
       mov r5, #0    // iterator for key
 
    loop:
 
-      ldr r10, [r0, r4]  // og[i]
+      ldrb r10, [r0, r4]  // og[i]
 
       cmp r10, #0
       beq done
@@ -50,10 +55,11 @@ encode:
       beq restartKey
 
    label1:
-     sub r11, r11, #96
+
+      sub r11, r11, #96
 
       mov r7, #0
-      add r7, r10, r11
+      add r7,r10, r11
 
       cmp r7, #26
       bgt subtract
@@ -61,27 +67,31 @@ encode:
    store:
 
       add r7, r7, #96
-      str r7, [r1, r4]
+      strb r7, [r1, r4]
 
-      add r4, r4, #4
-      add r5, r5, #4
+      add r4, r4, #1
+      add r5, r5, #1
+
+      bal loop
 
    subtract:
 
       sub r7, r7, #26
       bal store
 
-
    skip:
-      add r4, r4, #4
-      add r5, r5, #4
+
+      add r4, r4, #1
+      add r5, r5, #1
 
       bal loop
 
    restartKey:
+
       mov r5, #0
+      ldrb r11, [r2, r5]
       bal label1
 
 done:
-
+      pop {r7, r10, r11, pc}
       bx lr
