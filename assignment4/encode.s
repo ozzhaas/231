@@ -24,7 +24,7 @@ encode:
 
    loop:
 
-      ldrb r10, [r0, r4]  // og[i]
+      ldr r10, [r0, r4]  // og[i]
 
       cmp r10, #0
       beq done
@@ -43,7 +43,7 @@ encode:
       beq restartKey
 
    label1:
-      sub r11, r11, #96
+     sub r11, r11, #96
 
       mov r7, #0
       add r7,r10, r11
