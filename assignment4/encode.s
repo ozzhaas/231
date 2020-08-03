@@ -1,111 +1,176 @@
 /* Kellen Haas & Caroline Boyt
- * CPSC 2310
- * Assignment 4
- * 8/1/20
- */
+* CPSC 2310
+* Assignment 4
+* 8/1/20
+*/
 
 
-     .file "encode.s"
-     .section .text
-     .align 2
-     .global encode
-     .type encode, %function
+ .file "encode.s"
+ .section .text
+ .align 2
+ .global encode
+ .type encode, %function
 
 /********************************************************************
-    You are to write a subroutine for dealing with encoded messages using the
-    following private-key algorithm: Consider each letter of a message and of
-    a shared key as an integer from 1 to 26 (i.e., a=1, b=2, ..., z=26).
-    The resulting letter in the encoded message is obtained by adding the
-    letter values together and then subtracting 26 if the sum is greater than
-    26. The key is repeated until the complete message is encoded. Spaces,
-     digits, and punctuation are not encoded but they do count towards the
-     repetition of the key.
+You are to write a subroutine for dealing with encoded messages using the
+following private-key algorithm: Consider each letter of a message and of
+a shared key as an integer from 1 to 26 (i.e., a=1, b=2, ..., z=26).
+The resulting letter in the encoded message is obtained by adding the
+letter values together and then subtracting 26 if the sum is greater than
+26. The key is repeated until the complete message is encoded. Spaces,
+ digits, and punctuation are not encoded but they do count towards the
+ repetition of the key.
 ********************************************************************/
 
-
-
 encode:
+    push {r7, r10, r11, lr}
 
-      push {r7, r10, r11, lr}
+    cmp r3, #1
+    beq decode
 
-      cmp r3, #1
-      beq done
+    mov r4, #0    // iterator for input string
+    mov r5, #0    // iterator for key
 
-      mov r4, #0    // iterator for input string
-      mov r5, #0    // iterator for key
 
-   loop:
+    encodeLoop:
+        ldrb r10, [r0, r4]  // og[i]
+        ldrb r11, [r2, r5]  // key[i]
 
-      ldrb r10, [r0, r4]  // og[i]
+        cmp r10, #0
+        beq done
 
-      cmp r10, #0
-      beq done
+        cmp r11, #0
+        beq encodeRestartKey
 
-      cmp r10, #97
-      blt skip
 
-      cmp r10, #122
-      bgt skip
+    encodeCalculate:
+        //If og[i] == space --> store the space in new array and then increment both
+        cmp r10, #32
+        beq encodeStoreSpace
 
-      sub r10, r10, #96
+        //If key[i] == space --> store the letter in og[i] in the new array and increment both
+        cmp r11, #32
+        beq encodeStoreSpace
 
-      ldrb r11, [r2, r5]  // key[i]
+        cmp r10, #97
+        blt encodeIncrement
 
-      cmp r11, #0
-      beq restartKey
+        cmp r10, #122
+        bgt encodeIncrement
 
-   label1:
+        sub r10, r10, #96
+        sub r11, r11, #96
 
-      sub r11, r11, #96
+        mov r7, #0
+        add r7, r10, r11
 
-      mov r7, #0
-      add r7,r10, r11
+        cmp r7, #26
+        bgt subtract
 
-      cmp r7, #26
-      bgt subtract
 
-   store:
+    storeEncode:
+        add r7, r7, #96
 
-<<<<<<< HEAD
-      strb r7, [r1, r4]
+        strb r7, [r1, r4]
 
-      add r4, r4, #1
-      add r5, r5, #1
-subtract:
-=======
-      add r7, r7, #96
-      strb r7, [r1, r4]
+        bal encodeIncrement
 
-      add r4, r4, #1
-      add r5, r5, #1
 
-      bal loop
+    subtract:
+        sub r7, r7, #26
+        bal storeEncode
 
-   subtract:
->>>>>>> 634e8773bc152f26dc7af4ccd576f1f5e0127730
 
-      sub r7, r7, #26
-      bal store
+    encodeIncrement:
+        add r4, r4, #1
+        add r5, r5, #1
 
-   skip:
+        bal encodeLoop
 
-<<<<<<< HEAD
-skip:
-    add r4, r4, #1
-    add r5, r5, #1
-=======
-      add r4, r4, #1
-      add r5, r5, #1
->>>>>>> 634e8773bc152f26dc7af4ccd576f1f5e0127730
+     encodeRestartKey:
+        mov r5, #0
+        ldrb r11, [r2, r5]
+        bal encodeCalculate
 
-      bal loop
+    encodeStoreSpace:
+        strb r10, [r1, r4]
+        add r4, r4, #1
+        add r5, r5, #1
+        bal encodeLoop
 
-   restartKey:
 
-      mov r5, #0
-      ldrb r11, [r2, r5]
-      bal label1
+/******************************************************************************/
+decode:
+    mov r4, #0    // iterator for input string
+    mov r5, #0    // iterator for key
 
-done:
-      pop {r7, r10, r11, pc}
-      bx lr
+
+    decodeLoop:
+        ldrb r10, [r0, r4]  // og[i]
+        ldrb r11, [r2, r5]  // key[i]
+
+        cmp r10, #0
+        beq done
+        cmp r11, #0
+        beq decodeRestartKey
+
+
+    decodeCalculate:
+    //If og[i] == space --> store the space in new array and then increment both
+        cmp r10, #32
+        beq decodeStoreSpace
+
+    //If key[i] == space --> store the letter in og[i] in the new array and increment both
+        cmp r11, #32
+        beq decodeStoreSpace
+
+        cmp r10, #97
+        blt decodeIncrement
+
+        cmp r10, #122
+        bgt decodeIncrement
+
+        sub r10, r10, #96
+        sub r11, r11, #96
+
+        mov r7, #0
+        sub r7, r10, r11
+
+        cmp r7, #0
+        blt addition
+
+
+    storeDecode:
+        add r7, r7, #96
+        strb r7, [r1, r4]
+        bal decodeIncrement
+
+
+    addition:
+        add r7, r7, #26
+        bal storeDecode
+
+
+    decodeIncrement:
+        add r4, r4, #1
+        add r5, r5, #1
+        bal decodeLoop
+
+
+    decodeRestartKey:
+        mov r5, #0
+        ldrb r11, [r2, r5]
+        bal decodeCalculate
+
+
+    decodeStoreSpace:
+        strb r10, [r1, r4]
+        add r4, r4, #1
+        add r5, r5, #1
+        bal decodeLoop
+
+
+    done:
+        strb r10, [r1, r4]
+        pop {r7, r10, r11, pc}
+        bx lr
